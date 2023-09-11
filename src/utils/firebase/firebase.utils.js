@@ -1,7 +1,8 @@
-import  { initializeApp } from 'firebase/app';
-import {getAuth,signInWithRedirect,signInWithPopup, GoogleAuthProvider} from 'firebase/auth';
-
-
+import {initializeApp} from 'firebase/app';
+import {getAuth, signInWithRedirect, signInWithPopup, GoogleAuthProvider} from 'firebase/auth';
+import {getFirestore, doc, getDoc, setDoc} from 'firebase/firestore'
+import async from "async";
+/* doc -> is the docoment instance , and getDoc and setDoc ->  referring o the actual data */
 const firebaseConfig = {
     apiKey: "AIzaSyBtZ-onWjInRjtcGeNTYhKhoUEwhypjDg4",
     authDomain: "crwn-clothing-db-7efd8.firebaseapp.com",
@@ -17,9 +18,43 @@ const firebaseApp = initializeApp(firebaseConfig);
 const provider = new GoogleAuthProvider();
 
 provider.setCustomParameters({
-    prompt : "select_account"
+    prompt: "select_account"
 });
 
 export const auth = getAuth();
 
-export const signInWithGooglePopup = () => signInWithPopup(auth,provider)
+
+export const signInWithGooglePopup = () => signInWithPopup(auth, provider);
+
+
+/*this allows to access to db , it points to the db*/
+export const db = getFirestore();
+
+
+export const createUserDocumentFromAuth = async (userAuth) => {
+    const userDocRef = doc(db, 'users', userAuth.uid); // here you can set the collections 'users' for our example
+
+    console.log(userDocRef);
+
+    const userSnapShot = await getDoc(userDocRef); // the data is the snapShot
+    console.log(userSnapShot.exists()); // this is how you can check if this document exist
+
+    if (!userSnapShot.exists()) {
+        const {displayName, email} = userAuth;
+        const createAt = new Date();
+
+        try {
+            await setDoc(userDocRef, {
+                displayName,
+                email,
+                createAt
+            })
+        } catch (error) {
+            console.log("error creating the user", error.message)
+        }
+
+    }
+
+    return userDocRef
+
+}
