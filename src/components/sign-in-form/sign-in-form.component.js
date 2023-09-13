@@ -1,4 +1,4 @@
-import {useContext, useState} from "react";
+import {useState} from "react";
 import FormInput from "../form-input/form-input.component";
 import Button from "../button/button.component";
 import {
@@ -8,7 +8,6 @@ import {
 } from "../../utils/firebase/firebase.utils";
 
 import './sign-in-form.styles.scss'
-import {UserContext} from "../../contexts/user.context";
 
 const defaultFormFields = {
     email: '',
@@ -20,10 +19,9 @@ const SignInForm = () =>{
     const [formFields,setFormFields]= useState(defaultFormFields);
     const {email, password} = formFields;
 
-    const {setCurrentUser} = useContext(UserContext);
 
     const resetFormFields = () => {
-        resetFormFields(defaultFormFields);
+        setFormFields(defaultFormFields);
     }
 
     const signInWithGoogle = async () => {
@@ -39,14 +37,13 @@ const SignInForm = () =>{
         try{
             const {user} = await signInAuthUserWithEmailAndPassword(email,password);
 
-            setCurrentUser(user);
             resetFormFields();
 
         }catch(error){
 
             switch(error.code){
                 case 'auth/wrong-password':
-                    alert('incorrect paswwrod for email');
+                    alert('incorrect password for email');
                     break;
                 case 'auth/user-not-found':
                     alert('No user associated with this email');
@@ -81,7 +78,7 @@ const SignInForm = () =>{
                 <div className={'buttons-container'}>
                     {/*when the button is clicked that meean that the callback from onSubmit form will be called*/}
                     <Button type={"submit"}>sign In</Button>
-                    <Button  buttonType = {'google'} type={"button"} onClick = {signInWithGoogle} >Google sign In</Button>
+                    <Button  buttonType= {'google'} type={"button"} onClick = {signInWithGoogle} >Google sign In</Button>
                 </div>
             </form>
         </div>
