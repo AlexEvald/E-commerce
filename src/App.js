@@ -16,9 +16,9 @@ function App() {
       <Routes>
           <Route path={'/'} element={<Navigation/>}>
             <Route index={true}  element={<Home/>}/>  {/* when the index is true when ever the parent path match then display this component also*/}
-            <Route path='/shop'  element={<Shop/>}/>
-            <Route path='/auth'  element={<Authentication/>}/>
-            <Route path='/checkout'  element={<Checkout/>}/>
+            <Route path='shop/*'  element={<Shop/>}/>
+            <Route path='auth'  element={<Authentication/>}/>
+            <Route path='checkout'  element={<Checkout/>}/>
           </Route>
       </Routes>
 
