@@ -1,4 +1,3 @@
-import {Route, Routes} from "react-router-dom";
 import CategoryPreview from "../../components/category-preview/category-preview.component";
 import {useContext} from "react";
 import {CategoriesContext} from "../../contexts/categoriesContext";
@@ -24,5 +23,5 @@ const CategoriesPreview = () => {
     )
 };
 
-export default Shop;
+export default CategoriesPreview;
 
