@@ -1,6 +1,7 @@
 import {createContext, useEffect, useReducer} from "react";
 import {createUserDocumentFromAuth, onAuthStateChangeListener, signOutUser} from "../utils/firebase/firebase.utils";
 import {createAction} from "../utils/reducer/reducer.utils";
+import {USER_ACTION_TYPE} from "../store/user/user.types";
 
 
 //as the actual value you want to acess
@@ -13,14 +14,7 @@ export const UserContext = createContext({
 
 
 
-
-
-export const USER_ACTION_TYPE = {
-    SET_CURRENT_USER :  'SET_CURRENT_USER'
-}
-
 const userReducer = (state, action) =>{
-    // console.log("THE TYPE ", action);
 
     const {type,payload} = action;
     switch(type){
