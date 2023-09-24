@@ -3,12 +3,14 @@ import {useParams} from "react-router-dom";
 import {Fragment, useContext, useEffect, useState} from "react";
 import {CategoriesContext} from "../../contexts/categoriesContext";
 import ProductCard from "../../components/product-card/product-card.component";
+import {useSelector} from "react-redux";
+import {SelectCategoriesMap} from "../../store/categories/category.selector";
 
 const Category = () => {
 
     //i am geting the url param
     const {category} = useParams();
-    const {categoriesMap} = useContext(CategoriesContext);
+    const categoriesMap = useSelector(SelectCategoriesMap);
     const [products, setProducts] = useState(categoriesMap[category]);
 
 
