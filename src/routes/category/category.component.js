@@ -8,7 +8,7 @@ import {SelectCategoriesMap} from "../../store/categories/category.selector";
 
 const Category = () => {
 
-    //i am geting the url param
+    //i am getting the url param
     const {category} = useParams();
     const categoriesMap = useSelector(SelectCategoriesMap);
     const [products, setProducts] = useState(categoriesMap[category]);

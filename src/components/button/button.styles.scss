@@ -19,17 +19,17 @@
   &:hover {
     background-color: white;
     color: black;
-    padding-left: 1px;
-    padding-right: 1px;
+    padding: 0 1px;
     border: 1px solid black;
   }
 
   &.google-sign-in {
     background-color: #4285f4;
     color: white;
-
+    flex-basis: 175px;
+    font-size: 11px;
     &:hover {
-      background-color: #357ae8;
+      background-color: #5d6067;
       border: none;
     }
   }
