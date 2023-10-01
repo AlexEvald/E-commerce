@@ -5,18 +5,18 @@ import './navigation.styles.scss';
 import {signOutUser} from "../../utils/firebase/firebase.utils";
 import CartIcon from "../../components/cart-icon/cart-icon.component";
 import CartDropdown from "../../components/cart-dropdown/cart-dropdown.component";
-import {CartContext} from "../../contexts/cart.context";
-import {useSelector} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import {CurrentUser} from "../../store/user/user.selector";
+import {selectIsCartOpen} from "../../store/cart/cart.selector";
+import {setIsCartOpen} from "../../store/cart/cart.action";
 const Navigation = () => {
 
-    // const {currentUser} = useContext(UserContext);
-
-    const currentUser = useSelector(CurrentUser)
-    const {isCartOpen,setIsCartOpen} = useContext(CartContext);
+    const  dispatch = useDispatch();
+    const currentUser = useSelector(CurrentUser);
+    const isCartOpen = useSelector(selectIsCartOpen)
 
     const closeCartPopup = () =>{
-        setIsCartOpen(false);
+        dispatch(setIsCartOpen(false));
     }
 
     return (
