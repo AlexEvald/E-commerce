@@ -1,6 +1,5 @@
 import {createAction} from "../../utils/reducer/reducer.utils";
 import {CART_ACTIONS_TYPES} from "./cart.types";
-import {CART_ACTIONS} from "../../contexts/cart.context";
 
 
 
